@@ -278,9 +278,9 @@ def smoothed_pseudo_wigner_ville(signal, timestamps=None, freq_bins=None,
             idx1 = (ti + tau - points - 1).astype(int)
             idx2 = (ti - tau - points - 1).astype(int)
             R = np.sum(g2 * signal[idx1] * np.conj(signal[idx2]))
-            tfr[1 + tau, icol] = fwindow[(lh + tau + 1).astype(int)] * R
+            tfr[1 + tau, icol] = fwindow[int(lh + tau + 1)] * R
             R = np.sum(g2 * signal[idx2] * np.conj(signal[idx1]))
-            tfr[freq_bins - tau - 1, icol] = fwindow[(lh - tau + 1).astype(int)] * R
+            tfr[freq_bins - tau - 1, icol] = fwindow[int(lh - tau + 1)] * R
         tau = np.round(freq_bins / 2.0)
         if (ti <= signal.shape[0] - tau) and (ti >= tau + 1) and (tau <= lh):
             points = np.arange(-min([lg, signal.shape[0] - ti - tau]),
